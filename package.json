@@ -1,0 +1,46 @@
+{
+  "name": "deeraj-portfolio",
+  "version": "1.0.0",
+  "description": "Modern portfolio website for Deeraj P Menon - BTech ECE Student & Embedded Systems Enthusiast",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve . --live",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "echo 'Ready for deployment'"
+  },
+  "keywords": [
+    "portfolio",
+    "website",
+    "frontend",
+    "html",
+    "css",
+    "javascript",
+    "responsive",
+    "modern",
+    "electronics",
+    "embedded-systems",
+    "robotics",
+    "web-development"
+  ],
+  "author": {
+    "name": "Deeraj P Menon",
+    "email": "deerajpmenon@gmail.com",
+    "url": "https://github.com/Deratheone"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Deratheone/portfolio-deeraj.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Deratheone/portfolio-deeraj/issues"
+  },
+  "homepage": "https://github.com/Deratheone/portfolio-deeraj#readme",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
