@@ -452,16 +452,27 @@ body {
 }
 
 .project-card {
+    position: relative;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    /* Remove background and border effects from the container */
+}
+
+.project-card .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    /* Move all visual effects to card-inner so they tilt together */
     background: var(--bg-card);
     border-radius: 20px;
     overflow: hidden;
-    transition: var(--transition);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(20px);
-    position: relative;
 }
 
-.project-card::before {
+.project-card .card-inner::before {
     content: '';
     position: absolute;
     top: 0;
@@ -474,7 +485,7 @@ body {
     z-index: 1;
 }
 
-.project-card::after {
+.project-card .card-inner::after {
     content: '';
     position: absolute;
     top: -1px;
@@ -488,18 +499,16 @@ body {
     transition: var(--transition);
 }
 
-.project-card:hover::before {
+.project-card:hover .card-inner::before {
     opacity: 1;
 }
 
-.project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(255, 83, 255, 0.2);
-    border-color: var(--primary-color);
+.project-card:hover .card-inner::after {
+    opacity: 0.3;
 }
 
-.project-card:hover::after {
-    opacity: 0.3;
+.project-card:hover .card-inner {
+    box-shadow: 0 20px 60px rgba(255, 83, 255, 0.2);
 }
 
 .project-image {
@@ -584,19 +593,31 @@ body {
     grid-column: 2;
 }
 
-.skill-category {    background: var(--bg-card);
+.skill-category {
+    position: relative;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    /* Remove background and border effects from the container */
+}
+
+.skill-category .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    /* Move all visual effects to card-inner so they tilt together */
+    background: var(--bg-card);
     padding: 2.5rem;
     border-radius: 20px;
     border: 1px solid var(--border-color);
     backdrop-filter: blur(20px);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-    transition: var(--transition);
 }
 
-.skill-category::before {
+.skill-category .card-inner::before {
     content: '';
     position: absolute;
     top: 0;
@@ -609,7 +630,7 @@ body {
     transition: var(--transition);
 }
 
-.skill-category::after {
+.skill-category .card-inner::after {
     content: '';
     position: absolute;
     top: -1px;
@@ -623,18 +644,16 @@ body {
     transition: var(--transition);
 }
 
-.skill-category:hover::before {
+.skill-category:hover .card-inner::before {
     opacity: 1;
 }
 
-.skill-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(60, 72, 250, 0.2);
-    border-color: var(--secondary-color);
+.skill-category:hover .card-inner::after {
+    opacity: 0.3;
 }
 
-.skill-category:hover::after {
-    opacity: 0.3;
+.skill-category:hover .card-inner {
+    box-shadow: 0 15px 40px rgba(60, 72, 250, 0.2);
 }
 
 .skill-category-title {
@@ -840,6 +859,52 @@ body {
 .footer p {
     color: var(--text-muted);
     font-size: 0.875rem;
+}
+
+/* 3D Hover Effect for Cards - Mouse Position Based */
+.project-card, .skill-category {
+    position: relative;
+    perspective: 800px;
+    transform-style: preserve-3d;
+}
+
+.project-card .card-inner, .skill-category .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+/* Mouse-based 3D effect - will be controlled by JavaScript */
+.project-card:hover .card-inner, .skill-category:hover .card-inner {
+    transition: all 0.1s ease-out;
+}
+
+/* Enhanced 3D depth for content */
+.project-card .card-inner .project-content, .skill-category .card-inner .skill-category-title, .skill-category .card-inner .skills-list {
+    transform: translateZ(20px);
+}
+
+.project-card .card-inner .project-image {
+    transform: translateZ(10px);
+}
+
+/* Reset transforms when not hovering */
+.project-card:not(:hover) .card-inner, .skill-category:not(:hover) .card-inner {
+    transform: rotateX(0deg) rotateY(0deg) scale(1);
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+/* Disable conflicting hover effects */
+.project-card:hover, .skill-category:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
 }
 
 /* Responsive Design */

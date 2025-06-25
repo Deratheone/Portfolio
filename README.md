@@ -73,8 +73,8 @@ Portfolio_Deeraj/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Deratheone/Portfolio.git
-   cd Portfolio
+   git clone https://github.com/yourusername/portfolio-deeraj.git
+   cd portfolio-deeraj
    ```
 
 2. **Open locally**
