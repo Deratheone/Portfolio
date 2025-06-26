@@ -768,6 +768,13 @@ body {
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(255, 83, 255, 0.3);
     position: relative;
+    color: white;
+}
+
+.contact-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
 }
 
 .contact-icon::before {
@@ -829,6 +836,13 @@ body {
     justify-content: center;
     min-width: 45px;
     height: 45px;
+    color: var(--text-secondary);
+}
+
+.copy-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
 }
 
 .copy-btn:hover {
@@ -839,11 +853,6 @@ body {
 .copy-btn.copied {
     background: rgba(0, 255, 0, 0.2);
     border-color: rgba(0, 255, 0, 0.5);
-}
-
-.copy-icon {
-    font-size: 1.125rem;
-    transition: var(--transition);
 }
 
 /* Footer */
