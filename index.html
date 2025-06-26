@@ -270,16 +270,16 @@
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(function() {
                 // Change button appearance to show success
-                const copyIcon = button.querySelector('.copy-icon');
-                const originalIcon = copyIcon.textContent;
+                const svgIcon = button.querySelector('svg');
+                const originalSVG = svgIcon.outerHTML;
                 
                 button.classList.add('copied');
-                copyIcon.textContent = '✓';
+                svgIcon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
                 
                 // Reset after 2 seconds
                 setTimeout(() => {
                     button.classList.remove('copied');
-                    copyIcon.textContent = originalIcon;
+                    svgIcon.outerHTML = originalSVG;
                 }, 2000);
             }).catch(function(err) {
                 console.error('Failed to copy: ', err);
@@ -292,21 +292,100 @@
                 document.body.removeChild(textArea);
                 
                 // Show success feedback
-                const copyIcon = button.querySelector('.copy-icon');
-                const originalIcon = copyIcon.textContent;
+                const svgIcon = button.querySelector('svg');
+                const originalSVG = svgIcon.outerHTML;
                 
                 button.classList.add('copied');
-                copyIcon.textContent = '✓';
+                svgIcon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
                 
                 setTimeout(() => {
                     button.classList.remove('copied');
-                    copyIcon.textContent = originalIcon;
+                    svgIcon.outerHTML = originalSVG;
                 }, 2000);
             });
         }
 
+        // Scroll Animation Observer
+        class ScrollAnimator {
+            constructor() {
+                this.observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+                this.init();
+            }
+
+            init() {
+                // Create intersection observer
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateElement(entry.target);
+                        }
+                    });
+                }, this.observerOptions);
+
+                // Observe all sections and cards
+                this.observeElements();
+            }
+
+            observeElements() {
+                // Observe sections
+                const sections = document.querySelectorAll('.section');
+                sections.forEach(section => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(30px)';
+                    this.observer.observe(section);
+                });
+
+                // Observe individual cards with stagger effect
+                const cards = document.querySelectorAll('.project-card, .skill-category');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.dataset.delay = index * 100; // Stagger animation
+                    this.observer.observe(card);
+                });
+
+                // Observe stats
+                const stats = document.querySelectorAll('.stat');
+                stats.forEach((stat, index) => {
+                    stat.style.opacity = '0';
+                    stat.style.transform = 'translateY(20px)';
+                    stat.dataset.delay = index * 150;
+                    this.observer.observe(stat);
+                });
+
+                // Observe contact methods
+                const contactMethods = document.querySelectorAll('.contact-method');
+                contactMethods.forEach((method, index) => {
+                    method.style.opacity = '0';
+                    method.style.transform = 'translateY(30px)';
+                    method.dataset.delay = index * 100;
+                    this.observer.observe(method);
+                });
+            }
+
+            animateElement(element) {
+                const delay = parseInt(element.dataset.delay) || 0;
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                    element.classList.add('fade-in-up');
+                }, delay);
+
+                // Unobserve after animation
+                this.observer.unobserve(element);
+            }
+        }
+
         // Immediate background setup for faster perceived loading
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize scroll animations
+            const scrollAnimator = new ScrollAnimator();
+            
             const canvasContainer = document.querySelector('.content--canvas');
             if (canvasContainer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 // Small delay to let page render first

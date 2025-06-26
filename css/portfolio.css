@@ -1060,6 +1060,42 @@ body {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
+/* Enhanced scroll animations */
+.section {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card, .skill-category {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-method {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .section,
+    .project-card,
+    .skill-category,
+    .stat,
+    .contact-method {
+        transition: none;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .fade-in-up {
+        animation: none;
+    }
+}
+
 /* Canvas positioning fix */
 .content--canvas {
     position: fixed;
