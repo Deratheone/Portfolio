@@ -265,9 +265,12 @@ body {
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 2rem;
+    z-index: 10;
+    position: relative;
 }
 
 .btn {
@@ -279,36 +282,55 @@ body {
     border: 2px solid transparent;
     display: inline-block;
     position: relative;
-    overflow: hidden;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    z-index: 1;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+.btn:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(134, 234, 231, 0.3);
 }
 
-.btn:hover::before {
-    left: 100%;
+.btn:active {
+    transform: translateY(-1px);
 }
+
+/* Ensure buttons are clickable */
+.btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Fix for potential text rendering issues */
+.btn-primary,
+.btn-secondary {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Removed shimmer effect to eliminate pink line artifact */
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #ff53ff 0%, #3c48fa 100%);
     color: var(--text-primary);
     box-shadow: 0 8px 25px rgba(255, 83, 255, 0.3);
+    border: none;
+    position: relative;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(255, 83, 255, 0.4);
+    filter: brightness(1.05) saturate(1.1);
 }
 
 .btn-secondary {
@@ -316,6 +338,8 @@ body {
     color: var(--primary-color);
     background: rgba(255, 83, 255, 0.05);
     backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
 }
 
 .btn-secondary:hover {
@@ -323,6 +347,7 @@ body {
     color: var(--text-primary);
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(255, 83, 255, 0.4);
+    border-color: var(--primary-color);
 }
 
 /* Scroll Indicator */
