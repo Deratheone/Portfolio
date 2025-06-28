@@ -1048,6 +1048,56 @@ body {
     }
 }
 
+/* Disable 3D tilt effects on mobile/touch devices for better accessibility */
+@media (max-width: 768px) {
+    .project-card, .skill-category {
+        perspective: none;
+        transform-style: flat;
+    }
+    
+    .project-card .card-inner, .skill-category .card-inner {
+        transform: none !important;
+        transform-style: flat;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .project-card:hover .card-inner, .skill-category:hover .card-inner {
+        transform: none !important;
+    }
+    
+    .project-card .card-inner .project-content, 
+    .skill-category .card-inner .skill-category-title, 
+    .skill-category .card-inner .skills-list,
+    .project-card .card-inner .project-image {
+        transform: none !important;
+    }
+}
+
+/* Also disable on touch devices regardless of screen size */
+@media (hover: none) and (pointer: coarse) {
+    .project-card, .skill-category {
+        perspective: none;
+        transform-style: flat;
+    }
+    
+    .project-card .card-inner, .skill-category .card-inner {
+        transform: none !important;
+        transform-style: flat;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .project-card:hover .card-inner, .skill-category:hover .card-inner {
+        transform: none !important;
+    }
+    
+    .project-card .card-inner .project-content, 
+    .skill-category .card-inner .skill-category-title, 
+    .skill-category .card-inner .skills-list,
+    .project-card .card-inner .project-image {
+        transform: none !important;
+    }
+}
+
 @media (max-width: 480px) {
     .nav-menu {
         gap: 1rem;

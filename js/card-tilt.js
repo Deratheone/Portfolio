@@ -2,10 +2,27 @@
 class CardTilt {
     constructor() {
         this.cards = [];
+        this.isMobile = this.detectMobile();
         this.init();
     }
 
+    detectMobile() {
+        // Check for touch device or small screen
+        return (
+            'ontouchstart' in window ||
+            navigator.maxTouchPoints > 0 ||
+            navigator.msMaxTouchPoints > 0 ||
+            window.innerWidth <= 768 ||
+            !window.matchMedia('(hover: hover)').matches
+        );
+    }
+
     init() {
+        // Don't initialize tilt effect on mobile devices
+        if (this.isMobile) {
+            return;
+        }
+
         // Find all project cards and skill categories
         const projectCards = document.querySelectorAll('.project-card');
         const skillCards = document.querySelectorAll('.skill-category');
@@ -70,7 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
     new CardTilt();
 });
 
+// Re-initialize on window resize to handle orientation changes
+let tiltInstance = null;
+window.addEventListener('resize', () => {
+    // Debounce resize events
+    clearTimeout(window.tiltResizeTimeout);
+    window.tiltResizeTimeout = setTimeout(() => {
+        tiltInstance = new CardTilt();
+    }, 250);
+});
+
 // Re-initialize if new content is added dynamically
 window.reinitCardTilt = () => {
-    new CardTilt();
+    tiltInstance = new CardTilt();
 };
