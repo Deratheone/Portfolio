@@ -1555,9 +1555,10 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 1.75rem 2.5rem;
     background: rgba(255, 255, 255, 0.03);
     border-bottom: 1px solid var(--border-color);
+    min-height: 90px;
 }
 
 .cv-title {
@@ -1565,24 +1566,34 @@ html {
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+    flex: 1;
+    margin-right: 2rem;
 }
 
 .cv-actions {
     display: flex;
+    flex-direction: row;
     gap: 1rem;
     align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
 }
 
 .cv-download-btn,
 .cv-fullscreen-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
+    padding: 0.875rem 1.5rem;
     font-size: 0.875rem;
     font-weight: 500;
     border-radius: 8px;
     transition: var(--transition);
+    white-space: nowrap;
+    min-width: 130px;
+    flex-shrink: 0;
 }
 
 .cv-download-btn svg,
@@ -1726,7 +1737,24 @@ html {
 /* CV Section Responsive Styles */
 @media (max-width: 1024px) {
     .cv-header {
-        padding: 1.25rem 1.5rem;
+        padding: 1.5rem 2rem;
+    }
+    
+    .cv-title {
+        margin-right: 1.5rem;
+    }
+    
+    .cv-actions {
+        gap: 0.75rem;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
+    .cv-download-btn,
+    .cv-fullscreen-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+        min-width: 110px;
     }
     
     .cv-pdf-container {
