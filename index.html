@@ -207,7 +207,7 @@
                         <div class="cv-viewer">
                             <div class="cv-header">
                                 <h3 class="cv-title">Deeraj P Menon - CV</h3>
-                                <div class="cv-actions">
+                                <div class="cv-actions desktop-only">
                                     <button onclick="downloadCV()" class="btn btn-primary cv-download-btn">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
@@ -246,13 +246,22 @@
                                         </svg>
                                     </div>
                                     <h4 class="metallic-silver-text">CV Preview</h4>
-                                    <p>On mobile devices, CV preview is limited. Please download the PDF for the best viewing experience.</p>
-                                    <button onclick="downloadCV()" class="btn btn-primary mobile-download-btn">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                                        </svg>
-                                        Download CV
-                                    </button>
+                                    <p>On mobile devices, CV preview is limited. View in full screen or download the PDF for the best experience.</p>
+                                    
+                                    <div class="mobile-cv-actions">
+                                        <button onclick="openCVFullscreen()" class="btn btn-secondary mobile-view-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                                            </svg>
+                                            View Full CV
+                                        </button>
+                                        <button onclick="downloadCV()" class="btn btn-primary mobile-download-btn">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                            </svg>
+                                            Download CV
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +283,7 @@
                             <div class="contact-icon-wrapper">
                                 <span class="contact-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2zM5 18v2h14v-2H5z"/>
                                     </svg>
                                 </span>
                             </div>
@@ -478,47 +487,8 @@
                     });
                 }, 100);
             }
-        });
 
-        // CV Functions
-        function downloadCV() {
-            // Create download link
-            const link = document.createElement('a');
-            link.href = 'img/cv.pdf';
-            link.download = 'Deeraj_P_Menon_CV.pdf';
-            link.target = '_blank';
-            
-            // Trigger download
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Show download feedback
-            const downloadBtns = document.querySelectorAll('.cv-download-btn, .mobile-download-btn');
-            downloadBtns.forEach(btn => {
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                    Downloaded!
-                `;
-                btn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                }, 3000);
-            });
-        }
-
-        function openCVFullscreen() {
-            // Open CV in new tab for better viewing
-            window.open('img/cv.pdf', '_blank');
-        }
-
-        // CV iframe loading handling
-        document.addEventListener('DOMContentLoaded', function() {
+            // CV iframe loading handling with error handling
             const cvIframe = document.querySelector('.cv-iframe');
             const cvLoading = document.querySelector('.cv-loading');
             
@@ -528,6 +498,17 @@
                     setTimeout(() => {
                         cvLoading.style.display = 'none';
                     }, 300);
+                });
+                
+                cvIframe.addEventListener('error', function() {
+                    cvLoading.innerHTML = `
+                        <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="color: #f59e0b; margin-bottom: 1rem;">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,17A1,1 0 0,1 11,16A1,1 0 0,1 12,15A1,1 0 0,1 13,16A1,1 0 0,1 12,17M12,14A1,1 0 0,1 11,13V8A1,1 0 0,1 12,7A1,1 0 0,1 13,8V13A1,1 0 0,1 12,14Z"/>
+                            </svg>
+                            <p style="color: var(--text-secondary); margin: 0;">PDF preview not available. Please download the CV.</p>
+                        </div>
+                    `;
                 });
                 
                 // Fallback: hide loading after 5 seconds
@@ -540,6 +521,73 @@
                     }
                 }, 5000);
             }
+
+            // CV Functions with better error handling
+            window.downloadCV = function() {
+                try {
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = 'img/cv.pdf';
+                    link.download = 'Deeraj_P_Menon_CV.pdf';
+                    link.target = '_blank';
+                    
+                    // Trigger download
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Show download feedback
+                    const downloadBtns = document.querySelectorAll('.cv-download-btn, .mobile-download-btn');
+                    downloadBtns.forEach(btn => {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = `
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                            Downloaded!
+                        `;
+                        btn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style.background = '';
+                        }, 3000);
+                    });
+                } catch (error) {
+                    console.error('Download failed:', error);
+                    // Fallback - open in new tab
+                    window.open('img/cv.pdf', '_blank');
+                }
+            };
+
+            window.openCVFullscreen = function() {
+                try {
+                    // Open CV in new tab for better viewing
+                    window.open('img/cv.pdf', '_blank');
+                    
+                    // Show feedback for mobile view button
+                    const viewBtns = document.querySelectorAll('.mobile-view-btn, .cv-fullscreen-btn');
+                    viewBtns.forEach(btn => {
+                        const originalText = btn.innerHTML;
+                        btn.innerHTML = `
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                            Opening CV...
+                        `;
+                        btn.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style.background = '';
+                        }, 2000);
+                    });
+                } catch (error) {
+                    console.error('Failed to open CV:', error);
+                    // Show error message
+                    alert('Unable to open CV. Please try downloading it instead.');
+                }
+            };
         });
     </script>
     <script src="js/portfolio.js"></script>
