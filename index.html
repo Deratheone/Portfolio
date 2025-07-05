@@ -18,6 +18,7 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#cv" class="nav-link">CV</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -192,7 +193,75 @@
                     </div>
                 </div>
             </div>
-        </section>        <!-- Contact Section -->
+        </section>        <!-- CV Section -->
+        <section id="cv" class="section">
+            <div class="container">
+                <h2 class="section-title metallic-blue-text">Curriculum Vitae</h2>
+                <div class="cv-content">
+                    <div class="cv-text">
+                        <p>Download my CV to learn more about my <strong>education</strong>, <strong>experience</strong>, and <strong>technical skills</strong>. Always up-to-date with my latest projects and achievements.</p>
+                    </div>
+                    
+                    <div class="cv-container">
+                        <!-- CV Viewer -->
+                        <div class="cv-viewer">
+                            <div class="cv-header">
+                                <h3 class="cv-title">Deeraj P Menon - CV</h3>
+                                <div class="cv-actions">
+                                    <button onclick="downloadCV()" class="btn btn-primary cv-download-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                        </svg>
+                                        Download CV
+                                    </button>
+                                    <button onclick="openCVFullscreen()" class="btn btn-secondary cv-fullscreen-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                                        </svg>
+                                        Full View
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- PDF Iframe for Desktop -->
+                            <div class="cv-pdf-container desktop-only">
+                                <iframe 
+                                    src="img/cv.pdf#toolbar=0&navpanes=0&scrollbar=0" 
+                                    class="cv-iframe"
+                                    title="Deeraj P Menon CV"
+                                    loading="lazy">
+                                </iframe>
+                                <div class="cv-loading">
+                                    <div class="loading-spinner"></div>
+                                    <p>Loading CV...</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Mobile-friendly fallback -->
+                            <div class="cv-mobile-fallback mobile-only">
+                                <div class="cv-mobile-content">
+                                    <div class="cv-mobile-icon">
+                                        <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="metallic-silver-text">CV Preview</h4>
+                                    <p>On mobile devices, CV preview is limited. Please download the PDF for the best viewing experience.</p>
+                                    <button onclick="downloadCV()" class="btn btn-primary mobile-download-btn">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                                        </svg>
+                                        Download CV
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="container">
                 <h2 class="section-title metallic-text">Let's Work Together</h2>
@@ -338,7 +407,7 @@
                 });
 
                 // Observe individual cards with stagger effect
-                const cards = document.querySelectorAll('.project-card, .skill-category');
+                const cards = document.querySelectorAll('.project-card, .skill-category, .cv-viewer');
                 cards.forEach((card, index) => {
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(30px)';
@@ -408,6 +477,68 @@
                         document.head.appendChild(script);
                     });
                 }, 100);
+            }
+        });
+
+        // CV Functions
+        function downloadCV() {
+            // Create download link
+            const link = document.createElement('a');
+            link.href = 'img/cv.pdf';
+            link.download = 'Deeraj_P_Menon_CV.pdf';
+            link.target = '_blank';
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show download feedback
+            const downloadBtns = document.querySelectorAll('.cv-download-btn, .mobile-download-btn');
+            downloadBtns.forEach(btn => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    Downloaded!
+                `;
+                btn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 3000);
+            });
+        }
+
+        function openCVFullscreen() {
+            // Open CV in new tab for better viewing
+            window.open('img/cv.pdf', '_blank');
+        }
+
+        // CV iframe loading handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const cvIframe = document.querySelector('.cv-iframe');
+            const cvLoading = document.querySelector('.cv-loading');
+            
+            if (cvIframe && cvLoading) {
+                cvIframe.addEventListener('load', function() {
+                    cvLoading.style.opacity = '0';
+                    setTimeout(() => {
+                        cvLoading.style.display = 'none';
+                    }, 300);
+                });
+                
+                // Fallback: hide loading after 5 seconds
+                setTimeout(() => {
+                    if (cvLoading.style.display !== 'none') {
+                        cvLoading.style.opacity = '0';
+                        setTimeout(() => {
+                            cvLoading.style.display = 'none';
+                        }, 300);
+                    }
+                }, 5000);
             }
         });
     </script>
