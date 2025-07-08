@@ -1807,4 +1807,97 @@ html {
     transform: translateY(0);
 }
 
+/* Experience Section Styles */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.experience-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem 2.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: box-shadow 0.3s;
+}
+
+.experience-card:hover {
+    box-shadow: 0 8px 32px rgba(80, 80, 255, 0.12), 0 1.5px 8px rgba(0,0,0,0.08);
+}
+
+.experience-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.experience-role {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.experience-time {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.experience-meta {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.experience-details ul {
+    margin: 0 0 0 1.25rem;
+    padding: 0;
+    color: var(--text-primary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.experience-details ul ul {
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.98rem;
+    opacity: 0.95;
+}
+
+.experience-details a.project-link {
+    color: var(--secondary-color);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.experience-details a.project-link:hover {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .experience-card {
+        padding: 1.25rem 1rem;
+    }
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .experience-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
 
