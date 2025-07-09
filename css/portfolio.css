@@ -1808,10 +1808,9 @@ html {
 }
 
 /* Experience Section Styles */
-.experience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+.experience-content {
+    max-width: 900px;
+    margin: 0 auto;
     margin-top: 2rem;
 }
 
@@ -1820,83 +1819,205 @@ html {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    padding: 2rem 2.5rem;
+    overflow: hidden;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, transform 0.3s;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    min-height: 400px;
 }
 
 .experience-card:hover {
-    box-shadow: 0 8px 32px rgba(80, 80, 255, 0.12), 0 1.5px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 40px rgba(80, 80, 255, 0.15), 0 2px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.experience-image {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(80, 80, 255, 0.1), rgba(255, 80, 255, 0.1));
+}
+
+.experience-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.experience-card:hover .experience-image img {
+    transform: scale(1.05);
+}
+
+.experience-details {
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .experience-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .experience-role {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
 }
 
 .experience-time {
     font-size: 1rem;
-    font-weight: 400;
-    opacity: 0.7;
+    font-weight: 500;
+    opacity: 0.8;
 }
 
-.experience-meta {
-    font-size: 1rem;
+.experience-company {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.company-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.experience-location {
+    font-size: 0.95rem;
     color: var(--text-secondary);
-    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.experience-summary {
+    margin-bottom: 1.5rem;
+}
+
+.experience-summary p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.experience-achievements {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.achievement-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.experience-tech {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.experience-details ul {
-    margin: 0 0 0 1.25rem;
-    padding: 0;
-    color: var(--text-primary);
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-.experience-details ul ul {
-    margin-top: 0.25rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.98rem;
-    opacity: 0.95;
-}
-
-.experience-details a.project-link {
+.experience-tech .tech-tag {
+    background: rgba(80, 80, 255, 0.1);
     color: var(--secondary-color);
-    text-decoration: underline;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: 500;
-    transition: color 0.2s;
+    border: 1px solid rgba(80, 80, 255, 0.2);
+    transition: all 0.2s;
 }
 
-.experience-details a.project-link:hover {
-    color: var(--primary-color);
+.experience-tech .tech-tag:hover {
+    background: rgba(80, 80, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.experience-details .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    transition: all 0.3s;
+    align-self: flex-start;
+}
+
+.experience-details .project-link:hover {
+    background: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(80, 80, 255, 0.3);
+}
+
+.experience-details .project-link svg {
+    transition: transform 0.2s;
+}
+
+.experience-details .project-link:hover svg {
+    transform: translateX(2px);
 }
 
 @media (max-width: 768px) {
     .experience-card {
-        padding: 1.25rem 1rem;
+        grid-template-columns: 1fr;
+        min-height: auto;
     }
-    .experience-header {
-        flex-direction: column;
-        align-items: flex-start;
+    
+    .experience-image {
+        height: 250px;
+    }
+    
+    .experience-details {
+        padding: 2rem 1.5rem;
+    }
+    
+    .experience-role {
+        font-size: 1.3rem;
+    }
+    
+    .company-name {
+        font-size: 1rem;
+    }
+    
+    .experience-achievements {
         gap: 0.5rem;
     }
-    .experience-meta {
-        flex-direction: column;
-        gap: 0.5rem;
+    
+    .achievement-item {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-details {
+        padding: 1.5rem 1rem;
+    }
+    
+    .experience-role {
+        font-size: 1.2rem;
     }
 }
 
