@@ -63,22 +63,22 @@ class CardTilt {
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
         
-        // Convert to percentage from center (-1 to 1)
-        const rotateY = ((mouseX - cardWidth / 2) / (cardWidth / 2)) * 8; // Reduced from 15 to 8 degrees
-        const rotateX = -((mouseY - cardHeight / 2) / (cardHeight / 2)) * 8; // Reduced from 15 to 8 degrees, inverted
+        // Convert to percentage from center (-1 to 1) and invert for "towards cursor" effect
+        const rotateY = -((mouseX - cardWidth / 2) / (cardWidth / 2)) * 6; // Subtle 6 degree max rotation
+        const rotateX = ((mouseY - cardHeight / 2) / (cardHeight / 2)) * 6; // Subtle 6 degree max rotation
         
-        // Apply the transformation
+        // Apply the transformation with subtle effect
         cardInner.style.transform = `
-            perspective(800px) 
+            perspective(1000px) 
             rotateX(${rotateX}deg) 
             rotateY(${rotateY}deg) 
-            scale3d(1.01, 1.01, 1.01)
+            scale3d(1.005, 1.005, 1.005)
         `;
     }
 
     resetCard(cardInner) {
         cardInner.style.transition = 'transform 0.5s cubic-bezier(.25,.8,.25,1)';
-        cardInner.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        cardInner.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     }
 }
 
