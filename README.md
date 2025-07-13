@@ -53,7 +53,7 @@ Portfolio_Deeraj/
 ### 🐾 SmartPaw
 - **Tech Stack**: React, TypeScript, Vite, Supabase
 - **Description**: Comprehensive pet care platform with boarding and grooming services
-- **Live Demo**: [smartpaw.vercel.app](https://smartpaw.vercel.app/)
+- **Live Demo**: [smartpaw.in](https://smartpaw.in)
 
 ## 🎨 Design Features
 
