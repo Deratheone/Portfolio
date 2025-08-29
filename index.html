@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Deeraj P Menon - Portfolio</title>
+    
+    <!-- Essential SEO Meta Tags -->
+    <title>Deeraj P Menon - ECE Student & Embedded Systems Developer | Portfolio</title>
+    <meta name="description" content="Portfolio of Deeraj P Menon, BTech ECE student at CUSAT specializing in embedded systems, robotics, and web development.">
+    <meta name="author" content="Deeraj P Menon">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/base.css" />
     <link rel="stylesheet" type="text/css" href="css/demo2.css" />
     <link rel="stylesheet" type="text/css" href="css/portfolio.css" />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <script>document.documentElement.className="js";</script>
 </head>
 <body class="demo-2">
@@ -333,8 +342,41 @@
                 <div class="contact-content">
                     <div class="contact-text">
                         <p>I'm always interested in hearing about <strong>new opportunities</strong> and <strong>exciting projects</strong>. Whether you have a question or just want to say hi, feel free to reach out!</p>
-                        <p class="contact-subtitle">Click on any contact method below to get in touch, or use the copy button to save the details.</p>
-                    </div>                    <div class="contact-methods">
+                        <p class="contact-subtitle">Send me a message using the form below or click on any contact method.</p>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form-container blur-bg">
+                        <h3 class="contact-form-title metallic-blue-text">Send Message</h3>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" id="name" name="name" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-input" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="6" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary form-submit-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                                </svg>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-methods">
                         <div class="contact-method" onclick="window.location.href='mailto:deerajpmenon@gmail.com'">
                             <div class="contact-icon-wrapper">
                                 <span class="contact-icon">
@@ -438,6 +480,49 @@
             });
         }
 
+        // Contact Form Handler
+        function handleContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) return;
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const subject = formData.get('subject');
+                const message = formData.get('message');
+                
+                // Create mailto link with form data
+                const mailtoLink = `mailto:deerajpmenon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                    `Hi Deeraj,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nBest regards,\n${name}`
+                )}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Show success feedback
+                const submitBtn = contactForm.querySelector('.form-submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    Message Sent!
+                `;
+                submitBtn.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+                
+                // Reset form and button after 3 seconds
+                setTimeout(() => {
+                    contactForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                }, 3000);
+            });
+        }
+
         // Scroll Animation Observer
         class ScrollAnimator {
             constructor() {
@@ -518,6 +603,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize scroll animations
             const scrollAnimator = new ScrollAnimator();
+            
+            // Initialize contact form
+            handleContactForm();
             
             const canvasContainer = document.querySelector('.content--canvas');
             if (canvasContainer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -646,6 +734,8 @@
             };
         });
     </script>
+    
+    <!-- Core Scripts -->
     <script src="js/portfolio.js"></script>
     <script src="js/card-tilt.js"></script>
 </body>
