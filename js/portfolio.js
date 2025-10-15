@@ -313,3 +313,37 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Project Filtering with Dropdown - Smooth No-Glitch Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const filterDropdown = document.getElementById('project-filter');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (filterDropdown && projectCards.length > 0) {
+        filterDropdown.addEventListener('change', function() {
+            const filter = this.value;
+            
+            // Filter projects with smooth, glitch-free animation
+            projectCards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                const shouldShow = filter === 'all' || (categories && categories.includes(filter));
+                
+                if (shouldShow) {
+                    // Show the card
+                    card.classList.remove('hiding');
+                    card.classList.remove('hidden');
+                } else {
+                    // Hide the card smoothly
+                    card.classList.add('hiding');
+                    
+                    // Wait for fade animation to complete before hiding
+                    setTimeout(() => {
+                        if (card.classList.contains('hiding')) {
+                            card.classList.add('hidden');
+                        }
+                    }, 300); // Match CSS transition duration
+                }
+            });
+        });
+    }
+});

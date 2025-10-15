@@ -89,7 +89,19 @@
         <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-title">Featured Projects</h2>                <div class="projects-grid">                    <div class="project-card">
+                <h2 class="section-title">Featured Projects</h2>
+                
+                <!-- Project Filter Dropdown -->
+                <div class="project-filter-container">
+                    <label for="project-filter" class="filter-label">Filter by Category:</label>
+                    <select id="project-filter" class="project-filter-dropdown">
+                        <option value="all">All Projects</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="software">Software</option>
+                    </select>
+                </div>
+                
+                <div class="projects-grid">                    <div class="project-card" data-category="hardware">
                         <div class="card-inner">
                             <div class="project-image">
                                 <img src="img/Rescue_Bot.jpeg" alt="Mine Rescue Robot" style="width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 8px;">
@@ -110,7 +122,51 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
+                    <div class="project-card" data-category="hardware">
+                        <div class="card-inner">
+                            <div class="project-image">
+                                <img src="img/esphunt.jpeg" alt="Signal Hunt Interface" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 8px;">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title metallic-silver-text">Signal Hunt</h3>
+                                <p class="project-description"><strong>ESP32-based treasure hunt system</strong> for educational events. Track hidden transmitters using a <strong>responsive radar interface</strong>. Developed for <strong>IEEE APS workshops</strong> to teach signal propagation principles through an interactive campus-wide game.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag">ESP32</span>
+                                    <span class="tech-tag">ESP-NOW</span>
+                                    <span class="tech-tag">Arduino</span>
+                                    <span class="tech-tag">WebServer</span>
+                                    <span class="tech-tag">IoT</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/Deratheone/Signal-Hunt" target="_blank" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="hardware">
+                        <div class="card-inner">
+                            <div class="project-image">
+                                <img src="img/line_following robot.jpeg" alt="Line Following Robot" style="width: 100%; height: 100%; object-fit: cover; object-position: center; border-radius: 8px;">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title metallic-silver-text">Line Following Robot</h3>
+                                <p class="project-description"><strong>Arduino Nano-based line follower robot</strong> built for competitive events. Uses a <strong>QTR 8RC IR sensor array</strong> for line detection, a <strong>TB6612FNG motor driver</strong>, and a <strong>Hall effect sensor</strong> to trigger tasks via magnets embedded in the track.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag">Arduino Nano</span>
+                                    <span class="tech-tag">QTR 8RC</span>
+                                    <span class="tech-tag">TB6612FNG</span>
+                                    <span class="tech-tag">PID Control</span>
+                                    <span class="tech-tag">Hall Sensor</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/Deratheone/line_follwing_robot_PID" target="_blank" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="software">
                         <div class="card-inner">
                             <div class="project-image">
                                 <img src="img/statuswindow_landing_page.png" alt="StatusWindow Dashboard" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
@@ -131,7 +187,7 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
+                    <div class="project-card" data-category="software">
                         <div class="card-inner">
                             <div class="project-image">
                                 <img src="img/smartpaw_landing_page.png" alt="SmartPaw Pet Care Platform" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
@@ -148,6 +204,29 @@
                                 <a href="https://www.smartpaw.in/" target="_blank" class="project-link">Visit Website</a>
                             </div>
                         </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="software">
+                        <div class="card-inner">
+                            <div class="project-image">
+                                <img src="img/kudumbAISree.png" alt="KudumbAISree AI Conversation Simulator" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title metallic-purple-text">KudumbAISree</h3>
+                                <p class="project-description">An <strong>interactive AI-powered conversation simulator</strong> bringing Kerala-style <strong>paradushanam</strong> to life. Experience <strong>chit-chat conversations</strong> with AI characters like Aliyamma, Chako, Babu, and Fathima, complete with <strong>character-specific English voices</strong> and a useless voice engine.</p>
+                                <div class="project-tech">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                    <span class="tech-tag">Google Gemini AI</span>
+                                    <span class="tech-tag">Web Speech API</span>
+                                    <span class="tech-tag">Tailwind CSS</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://kudumbaisree.vercel.app/" target="_blank" class="project-link">Live Demo</a>
+                                    <a href="https://github.com/Deratheone/kudumbAIsree" target="_blank" class="project-link">GitHub</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

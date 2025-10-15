@@ -19,6 +19,105 @@
     }
 }
 
+/* Project Filter Dropdown Styles */
+.project-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.project-filter-dropdown {
+    padding: 0.75rem 2rem 0.75rem 1rem;
+    background: rgba(15, 15, 35, 0.95);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 0.5rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    outline: none;
+    min-width: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a855f7' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.project-filter-dropdown:hover {
+    background: rgba(15, 15, 35, 0.98);
+    border-color: rgba(124, 58, 237, 0.5);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+.project-filter-dropdown:focus {
+    border-color: rgba(124, 58, 237, 0.6);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.project-filter-dropdown option {
+    background: #0f0f23;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+}
+
+.project-filter-dropdown option:hover {
+    background: rgba(124, 58, 237, 0.2);
+}
+
+.project-filter-dropdown option:checked {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    color: white;
+}
+
+/* Smooth project card transitions - NO GLITCH */
+.project-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.project-card.hiding {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+.project-card.hidden {
+    display: none;
+}
+
+/* Responsive dropdown */
+@media (max-width: 768px) {
+    .project-filter-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .filter-label {
+        font-size: 0.95rem;
+    }
+    
+    .project-filter-dropdown {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
 /* Contact Form Styles */
 .contact-form-container {
     margin-bottom: 3rem;
